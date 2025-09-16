@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kanban Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Шрифт -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="appbar">
+    <div class="appbar-left">
+      <div class="logo">Общая доска управления</div>
+      <div class="divider"></div>
+      <input id="searchInput" class="search" type="search" placeholder="Поиск по карточкам…" />
+    </div>
+    <div class="appbar-right">
+      <button id="addColumnBtn" class="btn btn-primary">Добавить колонку</button>
+      <button id="themeToggle" class="btn btn-ghost" title="Тема">
+        <span class="icon">🌞</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="board" class="board">
+    <section class="column" data-id="todo">
+      <header class="column-header">
+        <h2 class="column-title">Задача</h2>
+        <button class="icon-btn" title="Добавить карточку">＋</button>
+      </header>
+      <div class="cards"></div>
+      <button class="add-card">+ Добавить карточку</button>
+    </section>
+
+    <section class="column" data-id="doing">
+      <header class="column-header">
+        <h2 class="column-title">В процессе</h2>
+        <button class="icon-btn" title="Добавить карточку">＋</button>
+      </header>
+      <div class="cards"></div>
+      <button class="add-card">+ Добавить карточку</button>
+    </section>
+
+    <section class="column" data-id="done">
+      <header class="column-header">
+        <h2 class="column-title">Завершена</h2>
+        <button class="icon-btn" title="Добавить карточку">＋</button>
+      </header>
+      <div class="cards"></div>
+      <button class="add-card">+ Добавить карточку</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>⌘/Ctrl + F — быстрый поиск • Перетаскивайте карточки между колонками</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

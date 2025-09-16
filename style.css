@@ -1,0 +1,201 @@
+/* ---------- Токены темы ---------- */
+:root {
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --panel-2: #f1f3f9;
+  --text: #1f2430;
+  --muted: #6b7280;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --accent: #00b3b3;
+  --border: #e5e7eb;
+  --shadow: 0 10px 30px rgba(31, 36, 48, 0.08);
+  --radius: 14px;
+  --radius-sm: 10px;
+  --card-radius: 12px;
+  --focus: 0 0 0 3px rgba(79,70,229,.25);
+  --drag: 0 12px 28px rgba(0,0,0,.18);
+  --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+html[data-theme="dark"] {
+  --bg: #0f1116;
+  --panel: #161a22;
+  --panel-2: #1c2230;
+  --text: #e6e8ed;
+  --muted: #9aa3b2;
+  --primary: #8b7dff;
+  --primary-hover: #7668ff;
+  --accent: #39d0d8;
+  --border: #2a3140;
+  --shadow: 0 12px 30px rgba(0,0,0,.35);
+  --drag: 0 12px 34px rgba(0,0,0,.6);
+}
+
+/* ---------- Базовые стили ---------- */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.5;
+}
+
+/* ---------- App Bar ---------- */
+.appbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px;
+  background: linear-gradient(180deg, var(--panel), var(--panel) 60%, transparent);
+  backdrop-filter: saturate(1.2) blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+
+.appbar-left, .appbar-right { display: flex; align-items: center; gap: 12px; }
+.logo {
+  font-weight: 700; letter-spacing: 0.2px; font-size: 18px;
+  padding: 8px 12px; border-radius: 999px;
+  background: var(--panel-2);
+}
+.divider { width: 1px; height: 28px; background: var(--border); }
+
+.search {
+  width: clamp(220px, 30vw, 420px);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: var(--text);
+  outline: none;
+  transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+.search:focus { box-shadow: var(--focus); border-color: var(--primary); }
+
+/* ---------- Кнопки ---------- */
+.btn {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform .04s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+.btn:hover { box-shadow: var(--shadow); }
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: transparent;
+}
+.btn-primary:hover { background: var(--primary-hover); }
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+}
+.icon { display: inline-block; font-size: 18px; }
+
+/* ---------- Доска ---------- */
+.board {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 340px);
+  gap: 16px;
+  padding: 18px;
+  overflow-x: auto;
+  align-items: start;
+}
+
+.column {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex; flex-direction: column;
+  min-height: 180px;
+}
+
+.column-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 12px 6px 12px;
+}
+.column-title { margin: 0; font-size: 15px; font-weight: 600; }
+.icon-btn {
+  border: none; background: transparent; cursor: pointer; padding: 6px 8px; border-radius: 8px;
+  color: var(--muted);
+}
+.icon-btn:hover { background: var(--panel-2); color: var(--text); }
+
+.cards {
+  display: flex; flex-direction: column;
+  gap: 10px;
+  padding: 10px 12px 6px 12px;
+  min-height: 120px;
+  border-top: 1px dashed transparent;
+  border-bottom: 1px dashed transparent;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.cards.drag-over {
+  background: color-mix(in oklab, var(--panel-2), transparent 40%);
+  border-color: var(--border);
+}
+
+.add-card {
+  margin: 8px 12px 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--panel-2);
+  border: 1px dashed var(--border);
+  color: var(--muted);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.add-card:hover { background: #e9ecff1f; color: var(--text); border-color: var(--primary); }
+
+/* ---------- Карточка ---------- */
+.card {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 12px;
+  box-shadow: var(--shadow);
+  cursor: grab;
+  transition: box-shadow .2s ease, transform .08s ease, border-color .2s ease, background .2s ease;
+}
+.card:hover { box-shadow: 0 8px 22px rgba(0,0,0,.08); }
+.card.dragging {
+  opacity: .9;
+  transform: rotate(1deg);
+  box-shadow: var(--drag);
+}
+.card-title {
+  margin: 0 0 6px; font-weight: 600; font-size: 14px;
+}
+.card-actions {
+  display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px;
+}
+.tag {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 4px 8px; border-radius: 999px; background: #eef2ff; color: #4338ca; border: 1px solid #e0e7ff;
+}
+
+/* ---------- Футер ---------- */
+.footer {
+  color: var(--muted);
+  text-align: center;
+  padding: 18px;
+}
+
+/* ---------- Система ---------- */
+::selection { background: #b5c3ff; color: #000; }
+@media (max-width: 720px) {
+  .appbar { gap: 10px; }
+  .search { width: 48vw; }
+}
