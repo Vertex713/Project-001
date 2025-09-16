@@ -1,3 +1,4 @@
+console.log("script.js loaded");
 document.addEventListener("DOMContentLoaded", () => {
   const board = document.getElementById("board");
   const addColumnBtn = document.getElementById("addColumnBtn");
